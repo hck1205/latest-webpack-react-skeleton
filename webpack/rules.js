@@ -44,15 +44,22 @@ module.exports = [
     test: /\.(sa|sc|c)ss$/,
     exclude: path.resolve(__dirname, '..', 'node_modules'),
     use: [
+      isDevMode ? 'style-loader' : MiniCssExtractPlugin.loader,
       {
-        loader: MiniCssExtractPlugin.loader,
-        options: { hmr: true },
+        loader: 'css-loader',
+        options: {
+          modules: true,
+          importLoaders: 2,
+          sourceMap: isDevMode,
+        },
       },
-      { loader: 'css-loader' },
       {
         loader: 'postcss-loader',
         options: {
-          plugins: () => [require('autoprefixer')()],
+          postcssOptions: {
+            plugins: [['autoprefixer']],
+          },
+          sourceMap: isDevMode,
         },
       },
       {
@@ -63,7 +70,7 @@ module.exports = [
               path.resolve(__dirname, '..', 'src', 'assets/styles'),
             ],
           },
-          sourceMap: !isDevMode,
+          sourceMap: isDevMode,
         },
       },
     ],
