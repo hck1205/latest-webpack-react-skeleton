@@ -17,7 +17,7 @@ module.exports = {
     path: path.resolve(__dirname, '..', 'build'),
     filename: isDevMode ? 'js/[name].js' : 'js/[name].[contenthash:8].js',
     chunkFilename: isDevMode
-      ? 'js/[name].[hash].chunk.js'
+      ? 'js/[name].[fullhash].chunk.js'
       : 'js/[name].[contenthash:8].chunk.js',
     publicPath: '/',
   },
@@ -46,6 +46,7 @@ module.exports = {
       lib: path.resolve(__dirname, '..', 'src', 'lib'),
       constpack: path.resolve(__dirname, '..', 'src', 'constpack'),
       assets: path.resolve(__dirname, '..', 'src', 'assets'),
+      images: path.resolve(__dirname, '..', 'src', 'assets', 'images'),
     },
   },
 
